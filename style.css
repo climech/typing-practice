@@ -1,0 +1,198 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+@font-face {
+  font-family: "Iosevka";
+  font-display: block;
+  font-weight: 400;
+  font-stretch: normal;
+  font-style: normal;
+  src: url("assets/fonts/iosevka-regular.subset.woff2") format("woff2"),
+    url("assets/fonts/iosevka-regular.subset.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Iosevka";
+  font-display: block;
+  font-weight: 700;
+  font-stretch: normal;
+  font-style: normal;
+  src: url("assets/fonts/iosevka-bold.subset.woff2") format("woff2"),
+    url("assets/fonts/iosevka-bold.subset.woff") format("woff");
+}
+
+/*
+@font-face {
+  font-family: "Iosevka";
+  font-display: block;
+  font-weight: 400;
+  font-stretch: normal;
+  font-style: italic;
+  src: url("assets/fonts/iosevka-italic.subset.woff2") format("woff2"),
+    url("assets/fonts/iosevka-italic.subset.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Iosevka";
+  font-display: block;
+  font-weight: 700;
+  font-stretch: normal;
+  font-style: italic;
+  src: url("assets/fonts/iosevka-bolditalic.subset.woff2") format("woff2"),
+    url("assets/fonts/iosevka-bolditalic.subset.woff") format("woff");
+}
+*/
+
+html {
+  font-family: "Iosevka", monospace;
+  font-size: 17px;
+  background: #fed;
+}
+
+a, a:hover, a:visited {
+  color: inherit;
+}
+
+body {
+  position: relative;
+  min-width: 100vw;
+  min-height: 100vh;
+  padding: 4rem 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+body > * + * {
+  margin-top: 2rem;
+}
+
+body > header h1 {
+  text-align: center;
+  font-size: 1.6rem;
+}
+
+body > footer {
+  opacity: 0.2;
+}
+
+#github-link {
+  display: flex;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 120px;
+  height: 120px;
+  background: #000;
+  transform: translate(60px, -60px) rotate(45deg);
+  overflow: hidden;
+}
+
+#github-link a {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: rotate(-45deg) translate(-25px, 25px);
+}
+
+#github-link svg {
+  fill: #fed;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#app > * + * {
+  margin-top: 2rem;
+}
+
+#app > section {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 0.5rem;
+  height: 2.25rem;
+  border: 2px solid #e5d5c5; 
+}
+
+#app > section.given {
+  border-bottom: none;
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+#app > section.typed {
+  position: relative;
+  overflow: hidden;
+  background: #e5d5c5;
+  margin-top: 0;
+  border-top: none;
+  border-radius: 0 0 0.5rem 0.5rem;
+}
+
+#app > section.typed > input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+#app > section > div {
+  width: 0.7rem;
+  min-width: 0.7rem;
+  text-align: center;
+  height: 1.25rem;
+  line-height: 1.25rem;
+}
+
+@keyframes blink {
+  0% {
+    background: #000;
+    color: #fed;
+  }
+  40% {
+    background: #000;
+    color: #fed;
+  }
+  50% {
+    background: transparent;
+    color: #000;
+  }
+  90% {
+    background: transparent;
+    color: #000;
+  }
+  100% {
+    background: #000;
+    color: #fed;
+  }
+}
+
+#app > section > .hl {
+  background: #000;
+  color: #fed;
+}
+
+#app > section > .hl.animated {
+  animation: blink;
+  animation-timing-function: linear;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-delay: 0.25s;
+}
+
+#app > section > .err {
+  background: #ff334499;
+  color: #000;
+}
