@@ -64,21 +64,29 @@ function updateUI(root) {
   resetCells(elemGiven);
   resetCells(elemTyped);
 
-  const cellsGiven = elemGiven.querySelectorAll("div");
-  const cellsTyped = elemTyped.querySelectorAll("div");
   const bs = STATE.bufferSize;
   const mid = Math.floor(bs / 2);
   const d = STATE.typed.length - mid;
   const given = d < 0 ? STATE.given.slice(0, bs) : STATE.given.slice(d, d + bs);
   const typed = d < 0 ? STATE.typed : STATE.typed.slice(d);
 
+  let cellsGiven = elemGiven.querySelectorAll("div");
+  let cellsTyped = elemTyped.querySelectorAll("div");
+
   // Fill the cells.
   [...given].forEach((c, i) => (cellsGiven[i].textContent = c));
   [...typed].forEach((c, i) => (cellsTyped[i].textContent = c));
 
-  // Highlight current char.
+  // Highlight the current top-row cell.
   cellsGiven[typed.length].classList.add("hl");
+  
+  // Highlight and animate the current bottom-row cell.
   if (STATE.focused) {
+    // Trick the browser into restarting the animation.
+    cellsTyped[typed.length].after(document.createElement("div"));
+    cellsTyped[typed.length].remove();
+    cellsTyped = elemTyped.querySelectorAll("div");
+
     cellsTyped[typed.length].classList.add("hl", "animated");
   }
 
