@@ -24,13 +24,6 @@ function randomChoice(collection) {
   return collection[n];
 }
 
-function createCharElem(char) {
-  const div = document.createElement("div");
-  const text = document.createTextNode(char);
-  div.appendChild(text);
-  return div;
-}
-
 function makeCharset() {
   const s = STATE.settings;
   return (
