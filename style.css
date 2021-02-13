@@ -25,7 +25,6 @@
     url("assets/fonts/iosevka-bold.subset.woff") format("woff");
 }
 
-/*
 @font-face {
   font-family: "Iosevka";
   font-display: block;
@@ -36,6 +35,7 @@
     url("assets/fonts/iosevka-italic.subset.woff") format("woff");
 }
 
+/*
 @font-face {
   font-family: "Iosevka";
   font-display: block;
@@ -49,37 +49,89 @@
 
 html {
   font-family: "Iosevka", monospace;
-  font-size: 17px;
+  font-size: 15px;
   background: #fed;
 }
 
-a, a:hover, a:visited {
-  color: inherit;
-}
-
 body {
-  position: relative;
-  min-width: 100vw;
-  min-height: 100vh;
-  padding: 4rem 1rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  position: relative;
+  min-height: 100vh;
   overflow-x: hidden;
 }
 
-body > * + * {
+#root {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  max-width: 70ch;
+  padding: 3rem 1rem;
+}
+
+#root > * + * {
+  margin-top: 3rem;
+}
+
+#root > header {
+  padding: 1rem 0;
+}
+
+#root > header h1 {
+  text-align: center;
+  font-size: 1.75rem;
+}
+
+#root > footer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  text-align: center;
+  opacity: 0.3;
+  padding: 2rem 0;
+}
+
+#root > footer > * + * {
   margin-top: 2rem;
 }
 
-body > header h1 {
-  text-align: center;
-  font-size: 1.6rem;
+a,
+a:hover,
+a:visited {
+  color: inherit;
 }
 
-body > footer {
-  opacity: 0.2;
+p {
+  text-align: justify;
+  hyphens: auto;
+}
+
+button {
+  background: inherit;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+button:hover,
+button:focus {
+  background: #dfcfbf;
+  outline: none;
+}
+
+button svg {
+  width: 11px;
+  height: 11px;
+  fill: currentColor;
+}
+
+.space-out {
+  letter-spacing: 0.3rem;
+  word-spacing: -0.3rem;
+  margin: 0 0.25rem;
 }
 
 #github-link {
@@ -92,6 +144,7 @@ body > footer {
   background: #000;
   transform: translate(60px, -60px) rotate(45deg);
   overflow: hidden;
+  z-index: 1000;
 }
 
 #github-link a {
@@ -103,43 +156,88 @@ body > footer {
 }
 
 #github-link svg {
+  width: 32px;
+  height: 32px;
   fill: #fed;
 }
 
-#app {
+#welcome > * + * {
+  margin-top: 0.5rem;
+  text-align: justify;
+}
+
+#metronome {
+  display: inline-flex;
+  vertical-align: middle;
+  border: 2px solid #dfcfbf;
+  border-radius: 0.3rem;
+  height: 1.6rem;
+  line-height: 1.35rem;
+  background: #efdfcf;
+}
+
+#metronome > * {
+  padding: 0 0.33rem;
+}
+
+#metronome > * + * {
+  border-left: 2px solid #dfcfbf;
+}
+
+#metronome.on button.toggle .play,
+#metronome.off button.toggle .pause,
+#metronome.off button.slower,
+#metronome.off button.faster {
+  display: none;
+}
+
+#metronome span {
+  text-align: center;
+  min-width: 4.5rem;
+}
+
+#practice {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-#app > * + * {
-  margin-top: 2rem;
+#practice > * + * {
+  margin-top: 4rem;
 }
 
-#app > section {
+#practice > section {
   width: 100%;
+  font-size: 1.25rem;
   display: flex;
   align-items: center;
-  padding: 0 0.5rem;
-  height: 2.25rem;
-  border: 2px solid #e5d5c5; 
+  height: 2.75rem;
+  padding: 0.5rem;
+  border: 2px solid #dfcfbf;
 }
 
-#app > section.given {
+#practice > section > div {
+  flex: 1;
+  text-align: center;
+  height: 1.6rem;
+  line-height: 1.5rem;
+}
+
+#practice > section.given {
   border-bottom: none;
   border-radius: 0.5rem 0.5rem 0 0;
 }
 
-#app > section.typed {
+#practice > section.typed {
   position: relative;
   overflow: hidden;
-  background: #e5d5c5;
+  background: #efdfcf;
   margin-top: 0;
-  border-top: none;
   border-radius: 0 0 0.5rem 0.5rem;
 }
 
-#app > section.typed > input {
+#practice > section.typed > input {
   position: absolute;
   top: 0;
   left: 0;
@@ -148,12 +246,8 @@ body > footer {
   opacity: 0;
 }
 
-#app > section > div {
-  width: 0.7rem;
-  min-width: 0.7rem;
-  text-align: center;
-  height: 1.25rem;
-  line-height: 1.25rem;
+#practice .count {
+  font-weight: 700;
 }
 
 @keyframes blink {
@@ -179,12 +273,16 @@ body > footer {
   }
 }
 
-#app > section > .hl {
+#practice > section.given > .hl {
+  background: #dfcfbf;
+}
+
+#practice > section.typed > .hl {
   background: #000;
   color: #fed;
 }
 
-#app > section > .hl.animated {
+#practice > section > .hl.animated {
   animation: blink;
   animation-timing-function: linear;
   animation-duration: 1s;
@@ -192,7 +290,77 @@ body > footer {
   animation-delay: 0.25s;
 }
 
-#app > section > .err {
+#practice > section > .err {
   background: #ff334499;
   color: #000;
+}
+
+#practice .weights {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0;
+  padding-top: 4rem;
+  width: 320px;
+  position: relative;
+}
+
+#practice .weights > div {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #dfcfbf;
+  border-radius: 0.3rem;
+  min-width: 4.5rem;
+}
+
+#practice .weights .chars {
+  font-style: italic;
+  padding: 0.4rem 0.5rem;
+  text-align: center;
+}
+
+#practice .weights > div .weight {
+  display: flex;
+  border-top: 2px solid #dfcfbf;
+  background: #efdfcf;
+}
+
+#practice .weights > div .weight > * {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#practice .weights > div .weight > * + * {
+  border-left: 2px solid #dfcfbf;
+}
+
+#practice .weights > div .weight > span {
+  flex: 1;
+}
+
+#practice .weights > div .weight > span::before {
+  content: "x";
+}
+
+#practice .weights .controls {
+  display: flex;
+  flex-direction: column;
+}
+
+#practice .weights .controls > * {
+  padding: 0.3rem;
+}
+
+#practice .weights .controls > * + * {
+  border-top: 2px solid #dfcfbf;
+}
+
+#practice .weights > .lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
 }

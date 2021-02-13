@@ -1,6 +1,6 @@
-# typing-practice
+# Programmer's Typing Practice
 
-A tiny web app for practicing touch-typing, written in pure JavaScript.
+A simple web app for practicing touch-typing, written in vanilla JavaScript. Available [here](https://climech.github.io/typing-practice/).
 
 ## License
 
